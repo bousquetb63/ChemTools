@@ -53,20 +53,20 @@ var tallyElements = (compound) => {
   var count = compound.length;
   while (i < count){
     var elName = "";
-    if (regCaseUpper.test(compound[i])){
+    if (compound[i] && regCaseUpper.test(compound[i])){
       elName += compound[i];
       i++;
-      if(regCaseLower.test(compound[i])){
+      if(compound[i] && regCaseLower.test(compound[i])){
         elName += compound[i];
         i++;
-        if(regCaseLower.test(compound[i])){
+        if(compound[i] && regCaseLower.test(compound[i])){
           elName += compound[i];
           i++;
         }
       }
     }
     tally[elName] = 1;
-    if (regNum.test(compound[i])){
+    if (compound[i] && regNum.test(compound[i])){
       tally[elName] = parseInt(compound[i]);
       i++;
     }
@@ -75,8 +75,20 @@ var tallyElements = (compound) => {
   return tally;
 }
 // console.log(checkChemicalBalance("CH4 + O2", "CO2 + H20"));
-function checkChemicalBalance(reactant, product) {
-//getCoefficient -> check if coefficient is bigger than 1
-//partitionCoefficient -> remove coefficient multiply
-//tallyElements
+var checkChemicalBalance = (reactant, product) => {
+  var tally1 = splitEquationToFormulas(reactant).map(tallyElements).reduce((acc, tally) => {
+    for (var elSymbol in tally) {
+      acc[elSymbol] = acc[elSymbol] || 0;
+      acc[elSymbol] += tally[elSymbol];
+    }
+    return acc;
+  }, {});
+  var tally2 = splitEquationToFormulas(product).map(tallyElements).reduce((acc, tally) => {
+    for (var elSymbol in tally) {
+      acc[elSymbol] = acc[elSymbol] || 0;
+      acc[elSymbol] += tally[elSymbol];
+    }
+    return acc;
+  }, {});
+  console.table([tally1, tally2]);
 }
