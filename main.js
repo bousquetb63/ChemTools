@@ -33,6 +33,8 @@ var splitEquationToFormulas = (eq) =>
 };
 var regSpace = /\s/g;
 var regNum = /^[0-9]+$/;
+var regCaseUpper = /[A-Z]/;
+var regCaseLower = /[a-z]/;
 var getCoefficient = (formula) => {
   return regNum.test(formula[0]) ? parseInt(formula[0]) : 1;
 }
@@ -46,18 +48,35 @@ var partitionCoefficient = (compound) => {
 }
 var tallyElements = (compound) => {
   var {coefficient, compound} = partitionCoefficient(compound);
-  for (var i = 0; i < compound.length; i++)
-  {
-    console.log(regNum.test(compound[i]));
-    if (regNum.test(compound[i]))
-    {
-      compound.replace(compound[i], parseInt(compound[i]) * parseInt(coefficient));
+  var tally = {};
+  var i = 0;
+  var count = compound.length;
+  while (i < count){
+    var elName = "";
+    if (regCaseUpper.test(compound[i])){
+      elName += compound[i];
+      i++;
+      if(regCaseLower.test(compound[i])){
+        elName += compound[i];
+        i++;
+        if(regCaseLower.test(compound[i])){
+          elName += compound[i];
+          i++;
+        }
+      }
     }
+    tally[elName] = 1;
+    if (regNum.test(compound[i])){
+      tally[elName] = parseInt(compound[i]);
+      i++;
+    }
+    tally[elName] *= coefficient;
   }
+  return tally;
 }
 // console.log(checkChemicalBalance("CH4 + O2", "CO2 + H20"));
 function checkChemicalBalance(reactant, product) {
 //getCoefficient -> check if coefficient is bigger than 1
-//ridCoefficient -> remove coefficient multiply
-//
+//partitionCoefficient -> remove coefficient multiply
+//tallyElements
 }
