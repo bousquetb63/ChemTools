@@ -36,7 +36,28 @@ var regNum = /^[0-9]+$/;
 var getCoefficient = (formula) => {
   return regNum.test(formula[0]) ? parseInt(formula[0]) : 1;
 }
+var partitionCoefficient = (compound) => {
+  var coefficient = getCoefficient(compound);
+  if (coefficient != 1)
+  {
+    compound = compound.substr(1);
+  }
+  return {coefficient, compound};
+}
+var tallyElements = (compound) => {
+  var {coefficient, compound} = partitionCoefficient(compound);
+  for (var i = 0; i < compound.length; i++)
+  {
+    console.log(regNum.test(compound[i]));
+    if (regNum.test(compound[i]))
+    {
+      compound.replace(compound[i], parseInt(compound[i]) * parseInt(coefficient));
+    }
+  }
+}
 // console.log(checkChemicalBalance("CH4 + O2", "CO2 + H20"));
 function checkChemicalBalance(reactant, product) {
-
+//getCoefficient -> check if coefficient is bigger than 1
+//ridCoefficient -> remove coefficient multiply
+//
 }
