@@ -8,7 +8,7 @@
     "surge": "^0.18.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "surge": "surge --domain chemtools.surge.sh"
   },
   "repository": {
     "type": "git",

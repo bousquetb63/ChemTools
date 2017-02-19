@@ -1,20 +1,11 @@
-//Create element array
-var createElement = (elementName, elementSymbol, elementMass, elementNum) => {
-  return {
-    elementName,
-    elementSymbol,
-    elementMass,
-    elementNum
-  };
-};
 var checkElProperty = (element, prop, val) => {
    return (element[prop] === val);
 };
 var checkElName = (el, val) => {
-  return checkElProperty(el, "elementName", val);
+  return checkElProperty(el, "name", val);
 };
 var checkElSymbol = (el, val) => {
-  return checkElProperty(el, "elementSymbol", val);
+  return checkElProperty(el, "symbol", val);
 };
 
 var getElement = (elements, str) =>
@@ -104,4 +95,7 @@ var checkChemicalBalance = (reactant, product) => {
     return true;
   }
   return false;
+}
+var molarMass = (chem1, chem2) => {
+  chem1 /
 }
