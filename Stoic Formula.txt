@@ -1,0 +1,5 @@
+
+
+Xg of Element1     1 Mole Ele1       Moles of Ele2     MolarMass of Ele2
+--------------- * --------------- * --------------- * ------------------  = Grams of Ele 2
+	1          MolarMassg Ele1    Moles of Ele1      Moles of Ele2
