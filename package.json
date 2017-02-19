@@ -1,0 +1,23 @@
+{
+  "name": "chemtools",
+  "version": "0.0.0",
+  "description": "chemtool thing",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "surge": "^0.18.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bosuquetb63/ChemTools.git"
+  },
+  "author": "bousquetb63@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bosuquetb63/ChemTools/issues"
+  },
+  "homepage": "https://github.com/bosuquetb63/ChemTools#readme"
+}
