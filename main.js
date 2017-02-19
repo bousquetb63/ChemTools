@@ -96,6 +96,11 @@ var checkChemicalBalance = (reactant, product) => {
   }
   return false;
 }
-var molarMass = (chem1, chem2) => {
-  chem1 /
-}
+var calcMass = (eq) => {
+  var tally = tallyEquationElements(eq);
+  var sum = 0;
+  for (var elSymbol in tally){
+    sum += tally[elSymbol]* getElement(elSymbol).atomicMass;
+  }
+  return sum;
+};
