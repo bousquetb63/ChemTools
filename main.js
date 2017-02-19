@@ -100,7 +100,7 @@ var calcMass = (eq) => {
   var tally = tallyEquationElements(eq);
   var sum = 0;
   for (var elSymbol in tally){
-    sum += tally[elSymbol]* getElement(elSymbol).atomicMass;
+    sum += tally[elSymbol]* parseFloat(getElement(elements, elSymbol).atomicMass);
   }
   return sum;
 };
