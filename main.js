@@ -74,21 +74,34 @@ var tallyElements = (compound) => {
   }
   return tally;
 }
+var tallyEquationElements = (equation) => {
+  return splitEquationToFormulas(equation)
+      .map(tallyElements)
+      .reduce((acc, tally) => {
+        for (var elSymbol in tally) {
+          acc[elSymbol] = acc[elSymbol] || 0;
+          acc[elSymbol] += tally[elSymbol];
+        }
+        return acc;
+      }, {});
+}
 // console.log(checkChemicalBalance("CH4 + O2", "CO2 + H20"));
 var checkChemicalBalance = (reactant, product) => {
-  var tally1 = splitEquationToFormulas(reactant).map(tallyElements).reduce((acc, tally) => {
-    for (var elSymbol in tally) {
-      acc[elSymbol] = acc[elSymbol] || 0;
-      acc[elSymbol] += tally[elSymbol];
+  var tally1 = tallyEquationElements(reactant);
+  var tally2 = tallyEquationElements(product);
+  // console.table([tally1, tally2]);
+  var tallyKeys1 = Object.keys(tally1);
+  var tallyKeys2 = Object.keys(tally2);
+  if (tallyKeys1.length === tallyKeys2.length)
+  {
+    for (var i = 0; i < tallyKeys1.length; i++)
+    {
+      var key = tallyKeys1[i];
+      if (tally1[key] !== tally2[key]) {
+        return false;
+      }
     }
-    return acc;
-  }, {});
-  var tally2 = splitEquationToFormulas(product).map(tallyElements).reduce((acc, tally) => {
-    for (var elSymbol in tally) {
-      acc[elSymbol] = acc[elSymbol] || 0;
-      acc[elSymbol] += tally[elSymbol];
-    }
-    return acc;
-  }, {});
-  console.table([tally1, tally2]);
+    return true;
+  }
+  return false;
 }
